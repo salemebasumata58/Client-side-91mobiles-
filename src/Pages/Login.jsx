@@ -43,85 +43,87 @@ const Login = () => {
   };
   console.log(loginForm);
   return (
-    <div>
-      <Flex
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={useColorModeValue("gray.50", "gray.800")}
-      >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"} textAlign={"center"}>
-              Log in
-            </Heading>
-          </Stack>
-          <Box
-            rounded={"lg"}
-            w={"100%"}
-            margin="auto"
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow={"lg"}
-            p={8}
-          >
-            <Stack spacing={4}>
-              <FormControl id="email" isRequired>
-                <FormLabel>Email address</FormLabel>
+    <Flex
+      // minW={"2xl"}
+
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} minW="xl" py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"} textAlign={"center"}>
+            Log in
+          </Heading>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          w={"100%"}
+          margin="auto"
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <FormControl id="email" isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type="email"
+                name="email"
+                value={email || ""}
+                onChange={handleForm}
+              />
+            </FormControl>
+
+            <FormControl id="password" isRequired>
+              <FormLabel>Password</FormLabel>
+              <InputGroup>
                 <Input
-                  type="email"
-                  name="email"
-                  value={email || ""}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={password || ""}
                   onChange={handleForm}
                 />
-              </FormControl>
+                <InputRightElement h={"full"}>
+                  <Button
+                    variant={"ghost"}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }
+                  >
+                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
 
-              <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
-                <InputGroup>
-                  <Input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={password || ""}
-                    onChange={handleForm}
-                  />
-                  <InputRightElement h={"full"}>
-                    <Button
-                      variant={"ghost"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-
-              <Stack spacing={10} pt={2}>
-                <Button
-                  loadingText="Submitting"
-                  size="lg"
-                  bg={"teal.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "teal",
-                  }}
-                  onClick={handleLogin}
-                >
-                  Log in
-                </Button>
-              </Stack>
-              <Stack pt={6}>
-                <Text align={"center"}>
-                  Not Registered yet ? Click here to register.{" "}
-                  <Link ><Text color={"blue.400"}>Register</Text></Link>
-                </Text>
-              </Stack>
+            <Stack spacing={10} pt={2}>
+              <Button
+                loadingText="Submitting"
+                size="lg"
+                bg={"teal.400"}
+                color={"white"}
+                _hover={{
+                  bg: "teal",
+                }}
+                onClick={handleLogin}
+              >
+                Log in
+              </Button>
             </Stack>
-          </Box>
-        </Stack>
-      </Flex>
-    </div>
+            <Stack pt={6}>
+              <Text align={"center"}>
+                Not Registered yet ? Click here to register.{" "}
+                <Link>
+                  <Text color={"blue.400"}>Register</Text>
+                </Link>
+              </Text>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 };
 

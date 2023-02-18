@@ -39,6 +39,14 @@ const Signup = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let p = "";
+    p += phone;
+    if (p.length < 10 && p.length <= 12) {
+      return alert("Enter valid phone number of 10 characters..!");
+    }
+    if (password.length < 8) {
+      return alert("Password should be consist of 8 characters..!");
+    }
     if (password === pass) {
       let res = await dispatch(
         signupRequest({ username, email, password, phone })
@@ -111,6 +119,8 @@ const Signup = () => {
                   name="phone"
                   value={phone || ""}
                   onChange={handleForm}
+                  minLength={10}
+                  maxlength={12}
                 />
               </FormControl>
               <FormControl id="password" isRequired>
@@ -171,7 +181,10 @@ const Signup = () => {
               </Stack>
               <Stack pt={6}>
                 <Text align={"center"}>
-                  Already a user? click here to{" "}<Link color={"blue.400"} to={"/login"}><Text color={"blue.400"}>Login</Text></Link>
+                  Already a user? click here to{" "}
+                  <Link color={"blue.400"} to={"/login"}>
+                    <Text color={"blue.400"}>Login</Text>
+                  </Link>
                 </Text>
               </Stack>
             </Stack>
