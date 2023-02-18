@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+.react-pdf__Page__textContent span {
+	opacity: 0.1;
+  display: none;
+}
+.react-pdf__Page__textContent{
+  display: none;
+}
+
+.react-pdf__Page__textContent span::selection {
+	background-color: blue;
+}
+
+.react-pdf__Document {
+	line-height: initial;
+  border: 1px solid rgb(131, 255, 30);
+  height: 300px;
+  width: 600px;
+  overflow: scroll;
+  align-items: center;
+  
+}
