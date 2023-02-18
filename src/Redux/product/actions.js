@@ -3,7 +3,7 @@ import axios from "axios";
 export const uploadFile = (docs) => async (dispatch) => {
   try {
     console.log(docs);
-    let res = await axios.post("http://localhost:8080/upload", docs, {
+    let res = await axios.post("https://backend-side-91mobiles.onrender.com/upload", docs, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -16,7 +16,7 @@ export const uploadFile = (docs) => async (dispatch) => {
 export const getFile = () => async (dispatch) => {
     
         try {
-            const { data } = await axios.get(`http://localhost:8080/allfiles`);
+            const { data } = await axios.get(`https://backend-side-91mobiles.onrender.com/allfiles`);
             // setErrorMsg(""); 
             dispatch({ type: GET_FILES, payload: data })
           } catch (e) {

@@ -53,23 +53,10 @@ const Dashboard = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handlePdf = (e) => {
-    console.log(e.target.files[0]);
-    // setDocs(e.target.files[0]);
-    // dispatch(uploadFile(e.target.files[0]));
-    const [uploadedFile] = e.target.files[0];
-    setFile(uploadedFile);
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewSrc(fileReader.result);
-    };
-    fileReader.readAsDataURL(uploadedFile);
-    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png|pdf)$/));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(file);
+
     try {
       const { title } = state;
 
@@ -109,16 +96,18 @@ const Dashboard = () => {
     );
     dropRef.current.style.border = "2px dashed #e9ebeb";
   };
-  console.log(file);
+ 
 
   return (
     // <Box display={"flex"} justifyContent={"space-around"}flexDirection={{ base: 'column',sm:"row", md: 'row' }}>
     <Box
+    marginTop={10}
       boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
       backgroundColor="blue.100"
       textAlign={"center"}
       w={{ base: "sm", sm: "sm", lg: "2xl" }}
       margin={"auto"}
+      py={6}
     >
       <Box
         p={5}

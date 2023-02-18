@@ -2,7 +2,7 @@ import axios from "axios";
 import { LOGIN, SIGNUP } from "./actiontypes";
 export const signupRequest = (x) => async (dispatch) => {
   try {
-    let res = await axios.post("http://localhost:8080/users/signup", x);
+    let res = await axios.post("https://backend-side-91mobiles.onrender.com/users/signup", x);
     console.log(res.data);
     dispatch({ type: SIGNUP, payload: res.data });
     return res.data
@@ -14,7 +14,7 @@ export const signupRequest = (x) => async (dispatch) => {
 
 export const loginRequest = (x) => async (dispatch) => {
     try {
-      let res = await axios.post("http://localhost:8080/users/login", x);
+      let res = await axios.post("https://backend-side-91mobiles.onrender.com/users/login", x);
       console.log(res.data);
       dispatch({ type: LOGIN, payload: res.data });
       return res.data

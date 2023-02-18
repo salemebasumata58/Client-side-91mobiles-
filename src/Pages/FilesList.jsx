@@ -13,10 +13,13 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
+import { Spinner } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 export const getFile = async () => {
   try {
-    const { data } = await axios.get(`http://localhost:8080/allfiles`);
+    const { data } = await axios.get(
+      `https://backend-side-91mobiles.onrender.com/allfiles`
+    );
     // setErrorMsg("");
     return data;
   } catch (e) {
@@ -24,28 +27,27 @@ export const getFile = async () => {
   }
 };
 const FilesList = () => {
+  const [loading, SetLoading] = useState(false);
   const data = useSelector((store) => store.file.files);
   console.log(data);
   const [filesList, setFilesList] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("");
   const [title, setTitle] = useState("");
 
   useEffect(() => {
+    SetLoading(true);
     getFile().then((res) => setFilesList(res));
+    SetLoading(false);
   }, []);
 
   const deleteFiles = async (id) => {
     try {
       const result = await axios.delete(
-        `http://localhost:8080/deletefile/${id}`
+        `https://backend-side-91mobiles.onrender.com/deletefile/${id}`
       );
 
-      setErrorMsg("");
       console.log(result.data);
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        setErrorMsg("Error while downloading file. Try again later");
-      }
+    } catch (e) {
+      console.log(e);
     }
     getFile().then((res) => setFilesList(res));
   };
@@ -62,7 +64,17 @@ const FilesList = () => {
     }
   };
   console.log(filesList);
-
+  if (loading) {
+    return (
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="blue.500"
+        size="xl"
+      />
+    );
+  }
   return (
     <Box w={"70%"} margin="auto" marginTop={5} textAlign={"center"}>
       <Box
@@ -86,7 +98,6 @@ const FilesList = () => {
       </Box>
       <br />
       <TableContainer width={"100%"}>
-        {errorMsg && <p>{errorMsg}</p>}
         <Table>
           <Thead>
             <Tr>
